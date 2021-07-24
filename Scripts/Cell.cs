@@ -40,6 +40,8 @@ public class Cell
         }
 
         h /= colors.Count;
+        s /= colors.Count;
+        v /= colors.Count;
 
         return Color.FromHsv(h, Math.Min(s, 1.0f), Math.Min(v, 1.0f));
     }
