@@ -4,7 +4,7 @@
 [ext_resource path="res://Scenes/BuilingButton.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/BuildingPallet.cs" type="Script" id=3]
 [ext_resource path="res://Scenes/Cell.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Sprites/Buildings/Building.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Buildings/MintBuilding.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/Buildings/DarkBlueBuilding.png" type="Texture" id=6]
 [ext_resource path="res://Scripts/Camera2D.cs" type="Script" id=7]
 [ext_resource path="res://Sprites/Buildings/GreenBuilding.png" type="Texture" id=8]
@@ -34,6 +34,16 @@ buildingPalletPath = NodePath("../../CanvasLayer/Hud/BuildingPallet")
 cellWidth = 16
 cellHeight = 16
 cellSpritePrefab = ExtResource( 4 )
+hueScoreSlopeMod = 1.0
+hueScoreXMod = 1.0
+hueScoreYMod = 1.0
+satScoreSlopeMod = 1.0
+satScoreXMod = 1.0
+satScoreYMod = 1.0
+brightScoreSlopeMod = 1.0
+brightScoreXMod = 1.0
+brightScoreYMod = 1.0
+ScoreLabelPath = NodePath("../../CanvasLayer/Hud/Score")
 
 [node name="Camera2D" type="Camera2D" parent="World"]
 current = true
@@ -85,3 +95,11 @@ margin_bottom = 120.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.0
+
+[node name="Score" type="Label" parent="CanvasLayer/Hud"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "1000"
+__meta__ = {
+"_edit_use_anchors_": false
+}

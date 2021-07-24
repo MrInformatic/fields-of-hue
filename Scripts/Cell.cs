@@ -41,7 +41,7 @@ public class Cell
 
         h /= colors.Count;
 
-        return Color.FromHsv(h, s, v);
+        return Color.FromHsv(h, Math.Min(s, 1.0f), Math.Min(v, 1.0f));
     }
 
     public void updateColor()

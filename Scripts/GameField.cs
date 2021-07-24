@@ -4,6 +4,13 @@ using System.Collections.Generic;
 
 public class GameField : Node2D
 {
+    public CellPosition[] neighbours = new CellPosition[] {
+        new CellPosition(1, 0),
+        new CellPosition(1, 1),
+        new CellPosition(0, 1),
+        new CellPosition(-1, 1),
+    };
+
     [Export]
     public NodePath buildingPalletPath;
 
@@ -15,6 +22,38 @@ public class GameField : Node2D
 
     [Export]
     public PackedScene cellSpritePrefab;
+
+    [Export]
+    public double hueScoreSlopeMod;
+
+    [Export]
+    public double hueScoreXMod;
+
+    [Export]
+    public double hueScoreYMod;
+
+    [Export]
+    public double satScoreSlopeMod;
+
+    [Export]
+    public double satScoreXMod;
+
+    [Export]
+    public double satScoreYMod;
+
+    [Export]
+    public double brightScoreSlopeMod;
+
+    [Export]
+    public double brightScoreXMod;
+
+    [Export]
+    public double brightScoreYMod;
+
+    [Export]
+    public NodePath ScoreLabelPath;
+
+    public Label scoreLabel;
 
     public BuildingPallet buildingPallet;
 
@@ -44,9 +83,36 @@ public class GameField : Node2D
         }
     }
 
-    public void BuildBuilding(Building building)
+    public double calculateScore()
     {
+        var score = 0.0;
 
+        foreach (var entry in cells)
+        {
+            var cellPosition = entry.Key;
+            var cell = entry.Value;
+            var cellColor = cell.GetColor();
+
+            foreach (var neighbour in neighbours)
+            {
+                var otherCellPosition = new CellPosition(
+                    cellPosition.x + neighbour.x,
+                    cellPosition.y + neighbour.y
+                );
+
+                if (cells.ContainsKey(otherCellPosition))
+                {
+                    var otherCell = cells[otherCellPosition];
+                    var otherCellColor = otherCell.GetColor();
+
+                    score += (-hueScoreSlopeMod * Math.Pow((cellColor.h * 360.0 - otherCellColor.h * 360.0) - hueScoreXMod, 2.0)) / hueScoreXMod + hueScoreYMod;
+                    score += satScoreSlopeMod * Math.Pow((cellColor.s - otherCellColor.s) - satScoreXMod, 2.0) + satScoreYMod;
+                    score += brightScoreSlopeMod * Math.Pow((cellColor.v - otherCellColor.v) - brightScoreXMod, 2.0) + brightScoreYMod;
+                }
+            }
+        }
+
+        return score;
     }
 
     public override void _Ready()
@@ -54,6 +120,8 @@ public class GameField : Node2D
         cells = new Dictionary<CellPosition, Cell>();
         buildings = new Dictionary<CellPosition, Building>();
         buildingPallet = GetNode<BuildingPallet>(buildingPalletPath);
+        scoreLabel = GetNode<Label>(ScoreLabelPath);
+        updateScore();
     }
 
     public override void _UnhandledInput(InputEvent inputEvent)
@@ -82,6 +150,8 @@ public class GameField : Node2D
                         AddChild(building);
 
                         buildings.Add(cellPosition, building);
+
+                        updateScore();
                     }
                 }
             }
@@ -89,5 +159,10 @@ public class GameField : Node2D
         }
 
         base._UnhandledInput(inputEvent);
+    }
+
+    public void updateScore()
+    {
+        scoreLabel.Text = calculateScore().ToString();
     }
 }
