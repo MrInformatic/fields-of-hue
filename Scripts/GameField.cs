@@ -4,31 +4,80 @@ using System.Collections.Generic;
 
 public class GameField : Node2D
 {
-	private PackedScene cellSpritePrefab;
-	private Dictionary<CellPosition, Cell> cells;
+    [Export]
+    public NodePath buildingPalletPath;
 
-	public Cell GetCell(CellPosition cellPosition)
-	{
-		return cells[cellPosition];
-	}
+    [Export]
+    public int cellWidth;
 
-	public void AddColor(CellPosition cellPosition, Color color)
-	{
-		if (cells.ContainsKey(cellPosition))
-		{
-			cells[cellPosition].addColor(color);
-		}
-		else
-		{
-			var sprite = (Sprite)cellSpritePrefab.Instance();
-			AddChild(sprite);
+    [Export]
+    public int cellHeight;
 
-			Cell cell = new Cell(color, sprite, cellPosition);
-		}
-	}
+    [Export]
+    public PackedScene cellSpritePrefab;
 
-	public void BuildBuilding(Building building)
-	{
+    public BuildingPallet buildingPallet;
 
-	}
+    private Dictionary<CellPosition, Cell> cells;
+    private Dictionary<CellPosition, Building> buildings;
+
+    public Cell GetCell(CellPosition cellPosition)
+    {
+        return cells[cellPosition];
+    }
+
+    public void AddColor(CellPosition cellPosition, Color color)
+    {
+        if (cells.ContainsKey(cellPosition))
+        {
+            cells[cellPosition].addColor(color);
+        }
+        else
+        {
+            var sprite = (Sprite)cellSpritePrefab.Instance();
+            AddChild(sprite);
+
+            Cell cell = new Cell(color, sprite, cellPosition, cellWidth, cellHeight);
+        }
+    }
+
+    public void BuildBuilding(Building building)
+    {
+
+    }
+
+    public override void _Ready()
+    {
+        cells = new Dictionary<CellPosition, Cell>();
+        buildings = new Dictionary<CellPosition, Building>();
+        buildingPallet = GetNode<BuildingPallet>(buildingPalletPath);
+    }
+
+    public override void _UnhandledInput(InputEvent inputEvent)
+    {
+        if (inputEvent is InputEventMouseButton)
+        {
+            var inputEventMouseButton = (InputEventMouseButton)inputEvent;
+            if ((ButtonList)inputEventMouseButton.ButtonIndex == ButtonList.Left && inputEventMouseButton.Pressed)
+            {
+                if (buildingPallet.GetSelectedBuilding() != null)
+                {
+                    var cellPosition = new CellPosition(
+                        (int)Math.Round(inputEventMouseButton.GlobalPosition.x / (float)cellWidth),
+                        (int)Math.Round(inputEventMouseButton.GlobalPosition.y / (float)cellHeight)
+                    );
+
+                    var building = (Building)buildingPallet.GetSelectedBuilding().Instance();
+                    building.gameField = this;
+                    building.cellPosition = cellPosition;
+                    building.cellWidth = cellWidth;
+                    building.cellHeight = cellHeight;
+                    AddChild(building);
+                }
+            }
+
+        }
+
+        base._UnhandledInput(inputEvent);
+    }
 }

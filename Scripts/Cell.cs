@@ -8,14 +8,14 @@ public class Cell
     private Sprite sprite;
     private CellPosition position;
 
-    public Cell(Color color, Sprite sprite, CellPosition position)
+    public Cell(Color color, Sprite sprite, CellPosition position, int cellWidth, int cellHeight)
     {
         this.colors = new List<Color>();
         this.sprite = sprite;
         this.position = position;
 
         updateColor();
-        updatePosition();
+        updatePosition(cellWidth, cellHeight);
     }
 
     public void addColor(Color color)
@@ -48,8 +48,8 @@ public class Cell
         this.sprite.Modulate = GetColor();
     }
 
-    public void updatePosition()
+    public void updatePosition(int cellWidth, int cellHeight)
     {
-        this.sprite.Position = new Vector2(position.x, position.y);
+        this.sprite.Position = new Vector2(position.x * cellWidth, position.y * cellHeight);
     }
 }
