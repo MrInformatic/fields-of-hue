@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/GameField.cs" type="Script" id=1]
+
+[node name="Root" type="Node"]
+
+[node name="Hud" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BuildingPallet" type="Control" parent="Hud"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="Hud/BuildingPallet"]
+anchor_right = 1.0
+anchor_bottom = 0.2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Hud/BuildingPallet/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Hud/BuildingPallet/Panel/ScrollContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 100.0
+
+[node name="TextureButton" type="TextureButton" parent="Hud/BuildingPallet/Panel/ScrollContainer/HBoxContainer"]
+margin_bottom = 120.0
+expand = true
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="GameField" type="Node2D" parent="World"]
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="World/GameField"]
