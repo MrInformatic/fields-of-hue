@@ -28,6 +28,7 @@ public class GameField : Node2D
 
     public void AddColor(CellPosition cellPosition, Color color)
     {
+        GD.Print(cells.ContainsKey(cellPosition));
         if (cells.ContainsKey(cellPosition))
         {
             cells[cellPosition].addColor(color);
@@ -38,6 +39,8 @@ public class GameField : Node2D
             AddChild(sprite);
 
             Cell cell = new Cell(color, sprite, cellPosition, cellWidth, cellHeight);
+
+            cells.Add(cellPosition, cell);
         }
     }
 
@@ -62,17 +65,24 @@ public class GameField : Node2D
             {
                 if (buildingPallet.GetSelectedBuilding() != null)
                 {
+                    Vector2 position = GetGlobalMousePosition();
+
                     var cellPosition = new CellPosition(
-                        (int)Math.Round(inputEventMouseButton.GlobalPosition.x / (float)cellWidth),
-                        (int)Math.Round(inputEventMouseButton.GlobalPosition.y / (float)cellHeight)
+                        (int)Math.Round(position.x / (float)cellWidth),
+                        (int)Math.Round(position.y / (float)cellHeight)
                     );
 
-                    var building = (Building)buildingPallet.GetSelectedBuilding().Instance();
-                    building.gameField = this;
-                    building.cellPosition = cellPosition;
-                    building.cellWidth = cellWidth;
-                    building.cellHeight = cellHeight;
-                    AddChild(building);
+                    if (!buildings.ContainsKey(cellPosition))
+                    {
+                        var building = (Building)buildingPallet.GetSelectedBuilding().Instance();
+                        building.gameField = this;
+                        building.cellPosition = cellPosition;
+                        building.cellWidth = cellWidth;
+                        building.cellHeight = cellHeight;
+                        AddChild(building);
+
+                        buildings.Add(cellPosition, building);
+                    }
                 }
             }
 
