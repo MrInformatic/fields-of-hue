@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Sprites/Buildings/Pattern.png" type="Texture" id=1]
+[ext_resource path="res://BuildingColorBehaviour/LightBlueParallels.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/Buildings/LightBlueBuilding.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/Building.cs" type="Script" id=3]
 
