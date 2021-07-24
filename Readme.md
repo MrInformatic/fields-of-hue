@@ -4,6 +4,8 @@ This game is a tile based building / puzzle game where you place buildings which
 
 You could play it on itch.io: https://mrinformatic.itch.io/fields-of-hue
 
+![Sceenshot](./Screenshots/Sceenshot.png)
+
 ## Tools Used
 
 - Godot 3.3.2
