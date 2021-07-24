@@ -4,7 +4,7 @@ This game is a tile based building / puzzle game where you place buildings which
 
 You could play it on itch.io: https://mrinformatic.itch.io/fields-of-hue
 
-![Sceenshot](./Screenshots/Sceenshot.png)
+![Sceenshot](https://raw.githubusercontent.com/MrInformatic/fields-of-hue/main/Screenshots/Screenshot.png)
 
 ## Tools Used
 
