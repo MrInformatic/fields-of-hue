@@ -11,6 +11,7 @@ public class Cell
     public Cell(Color color, Sprite sprite, CellPosition position, int cellWidth, int cellHeight)
     {
         this.colors = new List<Color>();
+        this.colors.Add(color);
         this.sprite = sprite;
         this.position = position;
 

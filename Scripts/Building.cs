@@ -27,12 +27,17 @@ public class Building : Node2D
         {
             for (var y = 0; y < height; y++)
             {
-                var offsetCellPosition = new CellPosition(
-                    cellPosition.x + x - halfWidth,
-                    cellPosition.y + y - halfHeight
-                );
+                Color pixel = pattern.GetPixel(x, y);
 
-                gameField.AddColor(offsetCellPosition, pattern.GetPixel(x, y));
+                if (pixel.a > 0.0)
+                {
+                    var offsetCellPosition = new CellPosition(
+                        cellPosition.x + x - halfWidth,
+                        cellPosition.y + y - halfHeight
+                    );
+
+                    gameField.AddColor(offsetCellPosition, pixel);
+                }
             }
         }
         pattern.Unlock();

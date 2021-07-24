@@ -18,8 +18,6 @@ cellWidth = 16
 cellHeight = 16
 cellSpritePrefab = ExtResource( 4 )
 
-[node name="Building" parent="World/GameField" instance=ExtResource( 6 )]
-
 [node name="Hud" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
