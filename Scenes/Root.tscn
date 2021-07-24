@@ -1,10 +1,10 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Scripts/GameField.cs" type="Script" id=1]
 [ext_resource path="res://Scenes/BuilingButton.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/BuildingPallet.cs" type="Script" id=3]
 [ext_resource path="res://Scenes/Cell.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Sprites/Buildings/Building.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Buildings/MintBuilding.png" type="Texture" id=5]
 [ext_resource path="res://Sprites/Buildings/DarkBlueBuilding.png" type="Texture" id=6]
 [ext_resource path="res://Scripts/Camera2D.cs" type="Script" id=7]
 [ext_resource path="res://Sprites/Buildings/GreenBuilding.png" type="Texture" id=8]
@@ -23,6 +23,8 @@
 [ext_resource path="res://Scenes/Buildings/PurpleBuilding.tscn" type="PackedScene" id=21]
 [ext_resource path="res://Scenes/Buildings/OrangeBuilding.tscn" type="PackedScene" id=22]
 [ext_resource path="res://Sprites/Buildings/LightBlueBuilding.png" type="Texture" id=23]
+[ext_resource path="res://Sprites/Buildings/SaturatorBuilding.png" type="Texture" id=24]
+[ext_resource path="res://Scenes/Buildings/SaturatorBuilding.tscn" type="PackedScene" id=25]
 
 [node name="Root" type="Node"]
 
@@ -61,8 +63,8 @@ __meta__ = {
 }
 buildingButtonPrefab = ExtResource( 2 )
 containerPath = NodePath("Panel/ScrollContainer/HBoxContainer")
-buildings = [ ExtResource( 15 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 17 ), ExtResource( 16 ), ExtResource( 18 ), ExtResource( 22 ), ExtResource( 21 ), ExtResource( 20 ) ]
-buildingTextures = [ ExtResource( 6 ), ExtResource( 8 ), ExtResource( 23 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 5 ), ExtResource( 12 ), ExtResource( 11 ), ExtResource( 19 ) ]
+buildings = [ ExtResource( 15 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 17 ), ExtResource( 16 ), ExtResource( 18 ), ExtResource( 22 ), ExtResource( 21 ), ExtResource( 20 ), ExtResource( 25 ) ]
+buildingTextures = [ ExtResource( 6 ), ExtResource( 8 ), ExtResource( 23 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 5 ), ExtResource( 12 ), ExtResource( 11 ), ExtResource( 19 ), ExtResource( 24 ) ]
 
 [node name="Panel" type="Panel" parent="CanvasLayer/Hud/BuildingPallet"]
 anchor_left = 0.1
